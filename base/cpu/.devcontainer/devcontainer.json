@@ -3,7 +3,7 @@
 {
 	"name": "base",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "docker.io/ben0i0d/denv:base" 
+	"image": "docker.io/ben0i0d/cenv:base" 
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

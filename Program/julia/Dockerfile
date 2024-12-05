@@ -1,8 +1,8 @@
 FROM eoelab.org:1027/ben0i0d/cenv:python AS builder
 
 # install Julia packages in /opt/julias
-RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip --no-cache-dir install jill && jill install --confirm 
+RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && \
+    pip install jill && jill install --confirm 1
 
 FROM eoelab.org:1027/ben0i0d/cenv:base
 

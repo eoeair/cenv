@@ -103,7 +103,7 @@ jobs:
           tags: eoelab.org:1027/${{ gitea.repository }}:jre
 
 
-  Javascipt:
+  JS:
     runs-on: runner
     needs: Base
     steps:
@@ -209,7 +209,7 @@ jobs:
       - name: steam build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: steam
+          context: GS/steam
           build-args: |
             http_proxy=http://192.168.2.2:7890
             https_proxy=http://192.168.2.2:7890
@@ -224,12 +224,12 @@ jobs:
       - name: steam_wine build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: steam/steam_wine
+          context: GS/steam/steam_wine
           tags: eoelab.org:1027/${{ gitea.repository }}:steam_wine
 
   Push:
     runs-on: runner
-    needs: [Steam_Wine]
+    needs: [Steam_Wine,CUDA_Devel]
     steps:
       - name: login gitea_registry
         uses: https://eoelab.org:1027/actions/login-action@v3

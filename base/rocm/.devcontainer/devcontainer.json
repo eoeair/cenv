@@ -3,7 +3,7 @@
 {
 	"name": "rocm",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "eoelab.org:1027/ben0i0d/gpu:rocm",
+	"image": "eoelab.org:1027/ben0i0d/cenv:rocm",
 	"runArgs": ["--device","/dev/kfd", "--device","/dev/dri", "--security-opt", "seccomp=unconfined", "--shm-size","4G"]
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

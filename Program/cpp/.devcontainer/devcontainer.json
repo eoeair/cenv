@@ -3,7 +3,7 @@
 {
 	"name": "cpp",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "docker.io/ben0i0d/denv:cpp" 
+	"image": "docker.io/ben0i0d/cenv:cpp" 
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
