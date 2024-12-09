@@ -3,9 +3,9 @@ English | [中文](README_CN.md)
 
 **THIS doc for non-CN USER**
 
-**dockerhub: https://hub.docker.com/r/ben0i0d/cenv**
+**ghcr.io: https://github.com/eoeair/cenv/pkgs/container/cenv**
 
-**Our Gitea: https://eoelab.org:1027/ben0i0d/cenv**
+**Our Gitea: https://eoelab.org:1027/eoeair/cenv**
 
 ## Prerequisites
 * CPU : nothing to do
@@ -40,6 +40,7 @@ ROCM-->B
 
 B-->C{CI}
 C-->CA(Hexo)
+C-->CB(Jupyterlite)
 
 B-->G{GS}-->GA{MC}-->GAA(JAVA)
 GAA-->GAAA(JRE_8)

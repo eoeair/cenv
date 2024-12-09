@@ -3,9 +3,9 @@ English | [中文](README_CN.md)
 
 **为中国用户的文档**
 
-**dockerhub: https://hub.docker.com/r/ben0i0d/gpu**
+**ghcr.io: https://github.com/eoeair/cenv/pkgs/container/cenv**
 
-**Gitea: https://eoelab.org:1027/ben0i0d/gpu**
+**Our Gitea: https://eoelab.org:1027/eoeair/cenv**
 
 ## 先决条件
 * CPU : nothing to do
