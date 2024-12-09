@@ -151,6 +151,18 @@ jobs:
           context: Program/python
           tags: eoelab.org:1027/${{ gitea.repository }}:python
 
+  Jupyterlite:
+    runs-on: runner
+    needs: Python
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: jupyterlite build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: CI/jupyterlite
+          tags: eoelab.org:1027/${{ gitea.repository }}:jupyterlite
+
   Julia:
     runs-on: runner
     needs: Python

@@ -40,6 +40,7 @@ ROCM-->B
 
 B-->C{CI}
 C-->CA(Hexo)
+C-->CB(Jupyterlite)
 
 B-->G{GS}-->GA{MC}-->GAA(JAVA)
 GAA-->GAAA(JRE_8)
