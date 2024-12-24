@@ -16,7 +16,7 @@ RUN sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.l
     # Create user
     useradd --no-log-init --create-home --shell /bin/bash --uid "${UID}" --no-user-group "${USER}" && \
     # Create workspace(game_dir)
-    mkdir /workspace && chown "${UID}":"${GID}" /workspace && \
+    mkdir /workspace && chown -hR "${UID}":"${GID}" /workspace && \
     ln -s /usr/games/steamcmd /usr/bin/steamcmd && \
     steamcmd +login anonymous +quit
 
