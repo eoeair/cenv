@@ -264,7 +264,7 @@ jobs:
 
   Steam_Wine:
     runs-on: runner
-    needs: Base
+    needs: Steam
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
