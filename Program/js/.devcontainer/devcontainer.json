@@ -3,7 +3,7 @@
 {
 	"name": "JS",
 	
-	"image": "docker.io/ben0i0d/cenv:js",
+	"image": "ghcr.io/eoeair/cenv:js",
 
 	// Configure vscode-extensions.
 	"customizations": {
