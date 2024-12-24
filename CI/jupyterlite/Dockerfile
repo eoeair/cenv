@@ -1,4 +1,4 @@
-FROM eoelab.org:1027/ben0i0d/cenv:python
+FROM eoelab.org:1027/eoeair/cenv:python
 
 RUN pip install jupyterlite-core && \
     pip install jupyterlite-pyodide-kernel && \

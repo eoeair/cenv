@@ -3,7 +3,7 @@
 {
 	"name": "c",
 
-	"image": "docker.io/ben0i0d/cenv:c",
+	"image": "ghcr.io/eoeair/cenv:c",
 
 	// Configure vscode-extensions.
 	"customizations": {

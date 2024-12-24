@@ -2,5 +2,5 @@
 // For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/debian
 {
 	"name": "base",
-	"image": "docker.io/ben0i0d/cenv:base" 
+	"image": "ghcr.io/eoeair/cenv:base" 
 }

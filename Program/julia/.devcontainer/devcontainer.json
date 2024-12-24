@@ -3,7 +3,7 @@
 {
 	"name": "julia",
 	
-	"image": "docker.io/ben0i0d/cenv:julia",
+	"image": "ghcr.io/eoeair/cenv:julia",
 
 	// Configure vscode-extensions.
 	"customizations": {

@@ -3,7 +3,7 @@
 {
 	"name": "java",
 	
-	"image": "docker.io/ben0i0d/cenv:java",
+	"image": "ghcr.io/eoeair/cenv:java",
 	
 	// Configure vscode-extensions.
 	"customizations": {

@@ -3,7 +3,7 @@
 {
 	"name": "python",
 	
-	"image": "docker.io/ben0i0d/cenv:python",
+	"image": "ghcr.io/eoeair/cenv:python",
 	// Configure vscode-extensions.
 	"customizations": {
 		"vscode": {
