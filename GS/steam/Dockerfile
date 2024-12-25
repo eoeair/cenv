@@ -10,7 +10,7 @@ RUN sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.l
     echo steam steam/question select "I AGREE" | debconf-set-selections && \
     echo steam steam/license note '' | debconf-set-selections && \
     dpkg --add-architecture i386 && \
-    apt-get update --yes && apt-get install --yes steamcmd ca-certificates sudo && \
+    apt-get update --yes && apt-get install --yes steamcmd ca-certificates gosu && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     # Create user
     useradd --no-log-init --create-home --shell /bin/bash --uid "${UID}" --no-user-group "${USER}" && \
