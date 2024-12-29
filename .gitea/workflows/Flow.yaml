@@ -136,7 +136,7 @@ jobs:
       - name: hexo build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: CI/hexo
+          context: Renv/hexo
           tags: eoelab.org:1027/${{ gitea.repository }}:hexo
 
   Python:
@@ -160,7 +160,7 @@ jobs:
       - name: jupyterlite build
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
-          context: CI/jupyterlite
+          context: Renv/jupyterlite
           tags: eoelab.org:1027/${{ gitea.repository }}:jupyterlite
 
   Julia:
@@ -273,6 +273,19 @@ jobs:
         with:
           context: GS/steam/steam_wine
           tags: eoelab.org:1027/${{ gitea.repository }}:steam_wine
+
+  LLAMA:
+    runs-on: runner
+    needs: Base
+    steps:
+      - name: checkout code
+        uses: https://eoelab.org:1027/actions/checkout@v4
+      - name: llama build
+        uses: https://eoelab.org:1027/actions/build-push-action@v6
+        with:
+          context: Renv/llama
+          tags: eoelab.org:1027/${{ gitea.repository }}:llama
+
 
   Push:
     runs-on: runner

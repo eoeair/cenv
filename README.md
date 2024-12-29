@@ -29,7 +29,7 @@ English | [中文](README_CN.md)
 
 ## Image dependencies
 * `Program` : development environment, primarily serving the devcontainer.
-* `CI` : CI job environment
+* `Renv` : Runtime environment
 * `GS` : game server
 ```mermaid
 graph LR
@@ -38,7 +38,7 @@ CPU-->B{Base}
 CUDA-->B
 ROCM-->B
 
-B-->C{CI}
+B-->C{Renv}
 C-->CA(Hexo)
 C-->CB(Jupyterlite)
 

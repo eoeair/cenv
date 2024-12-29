@@ -29,7 +29,7 @@ English | [中文](README_CN.md)
 
 ## 镜像依赖
 * `Program`:开发环境，主要为devcontainer
-* `CI`:CI作业环境，
+* `Renv`:运行时环境，
 * `GS`:游戏服务器
 ```mermaid
 graph LR
@@ -38,7 +38,7 @@ CPU-->B{Base}
 CUDA-->B
 ROCM-->B
 
-B-->C{CI}
+B-->C{Renv}
 C-->CA(Hexo)
 C-->CB(Jupyterlite)
 
