@@ -7,5 +7,4 @@ WORKDIR /opt
 RUN pip install jupyterlite-core jupyterlite-pyodide-kernel && pip cache purge && \
     jupyter lite build
 
-ENTRYPOINT [ "jupyter" ]
-CMD [ "lite", "serve" ]
+ENTRYPOINT [ "jupyter", "lite", "serve" ]
