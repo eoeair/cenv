@@ -1,5 +1,11 @@
 FROM eoelab.org:1027/eoeair/cenv:python
 
-RUN pip install jupyterlite-core && \
-    pip install jupyterlite-pyodide-kernel && \
-    pip cache purge 
+EXPOSE 8000
+
+WORKDIR /opt
+
+RUN pip install jupyterlite-core jupyterlite-pyodide-kernel && pip cache purge && \
+    jupyter lite build
+
+ENTRYPOINT [ "jupyter" ]
+CMD [ "lite", "serve" ]
