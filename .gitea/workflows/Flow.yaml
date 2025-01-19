@@ -16,6 +16,7 @@ jobs:
 
   CUDA_Base:
     runs-on: runner
+    needs: Base
     steps:
       - name: checkout code
         uses: https://eoelab.org:1027/actions/checkout@v4
@@ -23,8 +24,6 @@ jobs:
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           context: base/cuda/base
-          build-args: |
-            DEBIAN_MIRROR=mirrors.ustc.edu.cn
           tags: eoelab.org:1027/${{ gitea.repository }}:cuda_base
   
   CUDA_Runtime:
@@ -51,20 +50,20 @@ jobs:
           context: base/cuda/devel
           tags: eoelab.org:1027/${{ gitea.repository }}:cuda_devel
 
-  ROCM:
-    runs-on: runner
-    steps:
-      - name: checkout code
-        uses: https://eoelab.org:1027/actions/checkout@v4
-      - name: ROCM build
-        uses: https://eoelab.org:1027/actions/build-push-action@v6
-        with:
-          context: base/rocm
-          build-args: |
-            UBUNTU_MIRROR=mirrors.ustc.edu.cn
-            http_proxy=http://192.168.2.2:7890
-            https_proxy=http://192.168.2.2:7890      
-          tags: eoelab.org:1027/${{ gitea.repository }}:rocm
+  # ROCM:
+  #   runs-on: runner
+  #   needs: Base
+  #   steps:
+  #     - name: checkout code
+  #       uses: https://eoelab.org:1027/actions/checkout@v4
+  #     - name: ROCM build
+  #       uses: https://eoelab.org:1027/actions/build-push-action@v6
+  #       with:
+  #         context: base/rocm
+  #         build-args: |
+  #           http_proxy=http://192.168.2.2:7890
+  #           https_proxy=http://192.168.2.2:7890      
+  #         tags: eoelab.org:1027/${{ gitea.repository }}:rocm
 
   C:
     runs-on: runner
