@@ -13,7 +13,7 @@ English | [中文](README_CN.md)
 * CUDA : nvidia-container-toolkit/nvidia-docker2
 
 ## 目标平台
-* OS : debian 12 / ubuntu 24.04（只有ROCM）
+* OS : debian 13 / ubuntu 24.04（只有ROCM）
 * ARCH : x86_64
 
 ## 版本
