@@ -13,7 +13,7 @@ English | [中文](README_CN.md)
 * CUDA : nvidia-container-toolkit/nvidia-docker2
 
 ## 目标平台
-* OS : debian 13 / ubuntu 24.04（只有ROCM）
+* OS : debian 13
 * ARCH : x86_64
 
 ## 版本
@@ -35,8 +35,8 @@ English | [中文](README_CN.md)
 graph LR
 
 CPU-->B{Base}
-CUDA-->B
-ROCM-->B
+B-->CUDA
+B-->ROCM
 
 B-->C{Renv}
 C-->CA(Hexo)

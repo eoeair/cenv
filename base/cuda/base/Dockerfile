@@ -1,6 +1,4 @@
-FROM debian:trixie-slim
-
-ARG DEBIAN_MIRROR
+FROM eoelab.org:1027/eoeair/cenv:base
 
 ARG NV_CUDA_CUDART_VERSION=12.4.127-1 \
     NV_CUDA_COMPAT_PACKAGE=cuda-compat-12-4 \
@@ -12,8 +10,7 @@ ENV NVIDIA_VISIBLE_DEVICES=all \
     PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH} \
     LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
-RUN sed -i "s/deb.debian.org/${DEBIAN_MIRROR}/g" /etc/apt/sources.list.d/debian.sources && \
-    apt-get update && apt-get install -y --no-install-recommends gnupg2 curl ca-certificates && \
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg2 curl ca-certificates && \
     curl -fsSLO https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/${NVARCH}/cuda-keyring_1.1-1_all.deb && \
     dpkg -i cuda-keyring_1.1-1_all.deb && rm cuda-keyring_1.1-1_all.deb &&\
 # # For libraries in the cuda-compat-* package: https://docs.nvidia.com/cuda/eula/index.html#attachment-a
