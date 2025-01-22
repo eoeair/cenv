@@ -6,9 +6,11 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg 
 
 FROM eoelab.org:1027/eoeair/cenv:base
 
+ARG JULIA_MIRROR
+
 COPY --from=builder /opt/julias/ /opt/julias/
 
-ENV JULIA_PKG_SERVER=https://mirrors.ustc.edu.cn/julia \
+ENV JULIA_PKG_SERVER=${JULIA_MIRROR} \
     JULIA_NUM_THREADS=8
 
 RUN ln -s "`find /opt/julias -name 'bin'`/julia" /usr/local/bin/julia 
