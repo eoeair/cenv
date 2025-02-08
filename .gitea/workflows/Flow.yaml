@@ -60,6 +60,9 @@ jobs:
         uses: https://eoelab.org:1027/actions/build-push-action@v6
         with:
           context: base/rocm
+          build-args: |
+            http_proxy=http://192.168.2.2:7890
+            https_proxy=http://192.168.2.2:7890      
           tags: eoelab.org:1027/${{ gitea.repository }}:rocm
 
   C:
