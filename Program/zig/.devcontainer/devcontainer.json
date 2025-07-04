@@ -1,0 +1,14 @@
+// For format details, see https://aka.ms/devcontainer.json. 
+// For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "zig",
+
+	"image": "ghcr.io/eoeair/cenv:zig",
+
+	// Configure vscode-extensions.
+	"customizations": {
+		"vscode": {
+		  "extensions": ["ziglang.vscode-zig"]
+		}
+	  }
+}

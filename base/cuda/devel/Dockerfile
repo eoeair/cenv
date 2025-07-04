@@ -1,4 +1,4 @@
-FROM eoelab.org:1027/eoeair/cenv:cuda_runtime
+FROM ghcr.io/eoeair/cenv:cuda_runtime
 
 ARG NV_CUDA_LIB_VERSION=12.4.1-1 \
     NV_CUDA_CUDART_DEV_VERSION=12.4.127-1 \

@@ -1,4 +1,4 @@
-FROM eoelab.org:1027/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:base
 
 ARG NV_CUDA_CUDART_VERSION=12.4.127-1 \
     NV_CUDA_COMPAT_PACKAGE=cuda-compat-12-4 \
