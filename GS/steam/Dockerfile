@@ -1,4 +1,4 @@
-FROM eoelab.org:1027/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:base
 
 # Configure environment
 ENV USER=steam \

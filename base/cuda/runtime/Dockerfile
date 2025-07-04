@@ -1,4 +1,4 @@
-FROM eoelab.org:1027/eoeair/cenv:cuda_base
+FROM ghcr.io/eoeair/cenv:cuda_base
 
 ARG NV_CUDA_LIB_VERSION=12.4.1-1 \
     NV_NVTX_VERSION=12.4.127-1 \

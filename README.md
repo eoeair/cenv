@@ -1,11 +1,6 @@
 # Cenv
-English | [中文](README_CN.md)
-
-**THIS doc for non-CN USER**
 
 **ghcr.io: https://github.com/eoeair/cenv/pkgs/container/cenv**
-
-**Our Gitea: https://eoelab.org:1027/eoeair/cenv**
 
 ## Prerequisites
 * CPU : nothing to do
@@ -13,7 +8,7 @@ English | [中文](README_CN.md)
 * CUDA : nvidia-container-toolkit/nvidia-docker2
 
 ## Platform
-* OS : debian 13
+* OS : debian 12
 * ARCH : x86_64
 
 ## Version
@@ -29,8 +24,8 @@ English | [中文](README_CN.md)
 
 ## Image dependencies
 * `Program` : development environment, primarily serving the devcontainer.
-* `Renv` : Runtime environment
 * `GS` : game server
+
 ```mermaid
 graph LR
 
@@ -38,31 +33,18 @@ CPU-->B{Base}
 B-->CUDA
 B-->ROCM
 
-B-->C{Renv}
-C-->CA(Hexo)
-C-->CB(Jupyterlite)
-
-B-->G{GS}-->GA{MC}-->GAA(JAVA)
+B-->G{GS}-->GA{MC}-->GAA{JAVA}
 GAA-->GAAA(JRE_8)
 GAA-->GAAB(JRE_11)
 GAA-->GAAC(JRE_17)
 GAA-->GAAD(JRE_21)
-
-G-->GB{MCSM}-->GBA(Web)
-GB-->GBB(Daemon)
-
-G-->GC(steam)-->GCA(steam_wine)
+G-->GB(steam)
 
 B-->P{PROGRAM}
 P-->PA(C)
 P-->PB(Cpp)
-P-->PC(Java)
-PC-->PCA(Jdk)
-PC-->PCB(Jre)
-P-->PD(Js)
-P-->PE(Julia)
-P-->PF(Python)
-P-->PG(R)
+P-->PC(Python)
+P-->PD(Zig)
 ```
 ## Upstream
 * NVIDIA: https://gitlab.com/nvidia/container-images/cuda
