@@ -15,3 +15,6 @@ ENV PATH="/opt/zig:${PATH}"
 # install xz-utils for extract zls
 RUN apt-get update --yes && apt-get install --yes xz-utils && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["tini", "-g", "--"]
+CMD ["bash"]

@@ -9,9 +9,19 @@ RUN apt-get update --yes && apt-get install --yes gnupg curl && \
 
 FROM ghcr.io/eoeair/cenv:base
 
-USER root
-
 COPY --from=builder /usr/lib/jvm/zulu21/ /usr/lib/jvm/zulu21/
 
-RUN ln -s /usr/lib/jvm/zulu21/bin/java /usr/bin/java
+USER root
+
+ENV JVM_XMS=1G \
+    JVM_XMX=2G
+
+WORKDIR /workspace
+
+RUN ln -s /usr/lib/jvm/zulu21/bin/java /usr/bin/java && \
+    mkdir -p /workspace
+
+# Configure container startup
+ENTRYPOINT ["tini", "-g", "--", "sh", "-c"]
+CMD ["java -jar -Xms${JVM_XMS} -Xmx${JVM_XMX} server.jar nogui"]
 
