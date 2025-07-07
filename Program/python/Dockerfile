@@ -9,4 +9,5 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends python
     python3 -m venv /opt/base && \
     echo '[global]\nindex-url = https://mirrors.ustc.edu.cn/pypi/web/simple' >  /etc/pip.conf
 
-WORKDIR "${HOME}"
+ENTRYPOINT ["tini", "-g", "--"]
+CMD ["bash"]
