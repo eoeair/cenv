@@ -13,9 +13,6 @@ COPY --from=builder /usr/lib/jvm/zulu11/ /usr/lib/jvm/zulu11/
 
 USER root
 
-ENV JVM_XMS=1G \
-    JVM_XMX=2G
-
 WORKDIR /workspace
 
 RUN ln -s /usr/lib/jvm/zulu11/bin/java /usr/bin/java && \
@@ -23,5 +20,5 @@ RUN ln -s /usr/lib/jvm/zulu11/bin/java /usr/bin/java && \
 
 # Configure container startup
 ENTRYPOINT ["tini", "-g", "--", "sh", "-c"]
-CMD ["java -jar -Xms${JVM_XMS} -Xmx${JVM_XMX} server.jar nogui"]
+CMD ["java -jar server.jar nogui"]
 
