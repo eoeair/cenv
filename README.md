@@ -29,18 +29,20 @@
 ```mermaid
 graph LR
 
-CPU-->B{Base}
-B-->CUDA
-B-->ROCM
+Base-->GPU
+GPU-->CUDA
+GPU-->ROCM
 
-B-->G{GS}-->GA{MC}-->GAA{JAVA}
+Base-->G{GS}-->GA{MC}
+G-->GB(steam)
+GA{MC}-->GAA{JAVA}
+GA{MC}-->GAB(BE)
 GAA-->GAAA(JRE_8)
 GAA-->GAAB(JRE_11)
 GAA-->GAAC(JRE_17)
 GAA-->GAAD(JRE_21)
-G-->GB(steam)
 
-B-->P{PROGRAM}
+Base-->P{PROGRAM}
 P-->PA(C)
 P-->PB(Cpp)
 P-->PC(Python)

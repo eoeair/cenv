@@ -1,0 +1,93 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build&Push image
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  base:
+    runs-on: self-hosted
+    permissions:
+      packages: write
+    steps:
+      - name: Login to GitHub Container Registry
+        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - uses: actions/checkout@v4
+      - name: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          context: base
+          containerfiles: base/Dockerfile
+          tags: ghcr.io/${{ github.repository }}:base
+      - name: push
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          tags: ghcr.io/${{ github.repository }}:base
+      - name: cleanup
+        run: |
+          podman logout ghcr.io
+
+
+  program:
+    needs: base
+    runs-on: self-hosted
+    permissions:
+      packages: write
+    strategy:
+      matrix:
+        program: [c, cpp, python, zig]
+    steps:
+      - name: Login to GitHub Container Registry
+        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - uses: actions/checkout@v4
+      - name: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          context: Program/${{ matrix.program }}
+          containerfiles: Program/${{ matrix.program }}/Dockerfile
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.program }}
+      - name: push
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.program }}
+      - name: cleanup
+        run: |
+          podman rmi ghcr.io/${{ github.repository }}:${{ matrix.program }}
+          podman logout ghcr.io
+
+  gs:
+    needs: base
+    runs-on: self-hosted
+    permissions:
+      packages: write
+    strategy:
+      matrix:
+        gs: [mc_jre_8, mc_jre_11, mc_jre_17, mc_jre_21, steam]
+    steps:
+      - name: Login to GitHub Container Registry
+        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - uses: actions/checkout@v4
+      - name: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          context: GS/${{ matrix.gs }}
+          containerfiles: GS/${{ matrix.gs }}/Dockerfile
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.gs }}
+      - name: push
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.gs }}
+      - name: cleanup
+        run: |
+          podman rmi ${{ github.repository }}:${{ matrix.gs }}
+          podman logout ghcr.io
