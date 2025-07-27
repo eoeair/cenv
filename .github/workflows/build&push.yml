@@ -72,7 +72,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        gs: [mc_jre_8, mc_jre_11, mc_jre_17, mc_jre_21, steam]
+        gs: [mc_jre_17, mc_jre_21, steam]
     steps:
       - name: Login to GitHub Container Registry
         run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
