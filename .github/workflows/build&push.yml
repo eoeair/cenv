@@ -16,12 +16,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   base:
-    runs-on: self-hosted
-    permissions:
-      packages: write
+    runs-on: lxc
     steps:
-      - name: Login to GitHub Container Registry
-        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - uses: actions/checkout@v4
       - name: build
         uses: redhat-actions/buildah-build@v2
@@ -29,26 +25,14 @@ jobs:
           context: base
           containerfiles: base/Dockerfile
           tags: ghcr.io/${{ github.repository }}:base
-      - name: push
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          tags: ghcr.io/${{ github.repository }}:base
-      - name: cleanup
-        run: |
-          podman logout ghcr.io
-
 
   program:
     needs: base
-    runs-on: self-hosted
-    permissions:
-      packages: write
+    runs-on: lxc
     strategy:
       matrix:
         program: [c, cpp, python, zig]
     steps:
-      - name: Login to GitHub Container Registry
-        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - uses: actions/checkout@v4
       - name: build
         uses: redhat-actions/buildah-build@v2
@@ -56,26 +40,16 @@ jobs:
           context: Program/${{ matrix.program }}
           containerfiles: Program/${{ matrix.program }}/Dockerfile
           tags: ghcr.io/${{ github.repository }}:${{ matrix.program }}
-      - name: push
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.program }}
-      - name: cleanup
-        run: |
-          podman rmi ghcr.io/${{ github.repository }}:${{ matrix.program }}
-          podman logout ghcr.io
 
   gs:
     needs: base
-    runs-on: self-hosted
+    runs-on: lxc
     permissions:
       packages: write
     strategy:
       matrix:
         gs: [mc_jre_17, mc_jre_21, steam]
     steps:
-      - name: Login to GitHub Container Registry
-        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - uses: actions/checkout@v4
       - name: build
         uses: redhat-actions/buildah-build@v2
@@ -83,11 +57,23 @@ jobs:
           context: GS/${{ matrix.gs }}
           containerfiles: GS/${{ matrix.gs }}/Dockerfile
           tags: ghcr.io/${{ github.repository }}:${{ matrix.gs }}
+
+  push:
+    needs: [program, gs]
+    runs-on: lxc
+    permissions:
+      packages: write
+    strategy:
+      matrix:
+        tag: [c, cpp, python, zig, mc_jre_17, mc_jre_21, steam]
+    steps:
+      - name: Login to GitHub Container Registry
+        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
       - name: push
         uses: redhat-actions/push-to-registry@v2
         with:
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.gs }}
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
       - name: cleanup
         run: |
-          podman rmi ${{ github.repository }}:${{ matrix.gs }}
+          podman rmi ${{ github.repository }}:${{ matrix.tag }}
           podman logout ghcr.io
