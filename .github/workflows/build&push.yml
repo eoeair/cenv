@@ -34,8 +34,7 @@ jobs:
         program: [c, cpp, python, zig]
     steps:
       - uses: actions/checkout@v4
-      - name: build
-        uses: redhat-actions/buildah-build@v2
+      - uses: redhat-actions/buildah-build@v2
         with:
           context: Program/${{ matrix.program }}
           containerfiles: Program/${{ matrix.program }}/Dockerfile
@@ -51,8 +50,7 @@ jobs:
         gs: [mc_jre_17, mc_jre_21, steam]
     steps:
       - uses: actions/checkout@v4
-      - name: build
-        uses: redhat-actions/buildah-build@v2
+      - uses: redhat-actions/buildah-build@v2
         with:
           context: GS/${{ matrix.gs }}
           containerfiles: GS/${{ matrix.gs }}/Dockerfile
@@ -65,15 +63,22 @@ jobs:
       packages: write
     strategy:
       matrix:
-        tag: [c, cpp, python, zig, mc_jre_17, mc_jre_21, steam]
+        tag: [base, c, cpp, python, zig, mc_jre_17, mc_jre_21, steam]
     steps:
       - name: Login to GitHub Container Registry
         run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
-      - name: push
-        uses: redhat-actions/push-to-registry@v2
+      - uses: redhat-actions/push-to-registry@v2
         with:
           tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
+  
+  cleanup:
+    needs: [push]
+    runs-on: lxc
+    permissions:
+      packages: write
+    steps:
+      - uses: camargo/delete-untagged-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: cleanup
-        run: |
-          podman rmi ${{ github.repository }}:${{ matrix.tag }}
-          podman logout ghcr.io
+        run: podman images | grep ghcr.io/${{ github.repository }} | awk '{ print $3 }' | xargs -r podman rmi -f
