@@ -19,8 +19,7 @@ jobs:
     runs-on: lxc
     steps:
       - uses: actions/checkout@v4
-      - name: build
-        uses: redhat-actions/buildah-build@v2
+      - uses: redhat-actions/buildah-build@v2
         with:
           context: base
           containerfiles: base/Dockerfile
@@ -43,8 +42,6 @@ jobs:
   gs:
     needs: base
     runs-on: lxc
-    permissions:
-      packages: write
     strategy:
       matrix:
         gs: [mc_jre_17, mc_jre_21, steam]
@@ -56,21 +53,45 @@ jobs:
           containerfiles: GS/${{ matrix.gs }}/Dockerfile
           tags: ghcr.io/${{ github.repository }}:${{ matrix.gs }}
 
+  renv:
+    needs: base
+    runs-on: lxc
+    strategy:
+      matrix:
+        renv: [zine]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: redhat-actions/buildah-build@v2
+        with:
+          context: Renv/${{ matrix.renv }}
+          containerfiles: Renv/${{ matrix.renv }}/Dockerfile
+          tags: ghcr.io/${{ github.repository }}:${{ matrix.renv }}
+
   push:
-    needs: [program, gs]
+    needs: [program, gs, renv]
     runs-on: lxc
     permissions:
       packages: write
     strategy:
       matrix:
-        tag: [base, c, cpp, python, zig, mc_jre_17, mc_jre_21, steam]
+        tag: [base, c, cpp, python, zig, mc_jre_17, mc_jre_21, steam, zine]
     steps:
-      - name: Login to GitHub Container Registry
-        run: podman login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+      - name: Prepare environment
+        run: |
+          sudo mkdir -p /run/user/1000
+          sudo chown -hR debian:debian /run/user/1000
+          mkdir -p ~/.docker
+          cp /run/user/1000/containers/auth.json ~/.docker/config.json
+      - uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          auth_file_path: /run/user/1000/containers/auth.json
       - uses: redhat-actions/push-to-registry@v2
         with:
           tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
-  
+
   cleanup:
     needs: [push]
     runs-on: lxc

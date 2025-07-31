@@ -15,6 +15,7 @@
 ## Image dependencies
 * `Program` : development environment, primarily serving the devcontainer.
 * `GS` : game server
+* `Renv`: runtime environment
 
 ```mermaid
 graph LR
@@ -31,6 +32,9 @@ P-->PA(C)
 P-->PB(Cpp)
 P-->PC(Python)
 P-->PD(Zig)
+
+Base-->R{RENV}
+R-->RA(Zine)
 ```
 
 ## Mirror source
