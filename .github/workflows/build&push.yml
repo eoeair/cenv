@@ -73,6 +73,7 @@ jobs:
     permissions:
       packages: write
     strategy:
+      max-parallel: 1
       matrix:
         tag: [base, c, cpp, python, zig, mc_jre_17, mc_jre_21, steam, zine]
     steps:
@@ -80,8 +81,6 @@ jobs:
         run: |
           sudo mkdir -p /run/user/1000
           sudo chown -hR debian:debian /run/user/1000
-          mkdir -p ~/.docker
-          cp /run/user/1000/containers/auth.json ~/.docker/config.json
       - uses: redhat-actions/podman-login@v1
         with:
           username: ${{ github.actor }}
