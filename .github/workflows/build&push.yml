@@ -21,85 +21,92 @@ jobs:
   base:
     runs-on: arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:podman
+      image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     steps:
-      - uses: actions/checkout@v4
-      - uses: redhat-actions/buildah-build@v2
-        with:
-          context: base
-          containerfiles: base/Dockerfile
-          tags: ghcr.io/${{ github.repository }}:base
-      - uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-      - uses: redhat-actions/push-to-registry@v2
-        with:
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
-      
+      - &checkout
+        run: |
+          wget https://github.com/eoeair/cenv/archive/refs/heads/main.zip
+          unzip main.zip
+          mv cenv-main/* .
+          rm -rf cenv-main main.zip
+      - &login
+        run: |
+          mkdir -p /kaniko/.docker
+          cat > /kaniko/.docker/config.json <<EOF
+          {
+            "auths": {
+              "ghcr.io": {
+                "auth": "$(echo -n '${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}' | base64)"
+              }
+            }
+          }
+          EOF
+      - run: |
+          /kaniko/executor \
+            --context base \
+            --dockerfile base/Dockerfile \
+            --destination ghcr.io/${{ github.repository }}:base \
+            --single-snapshot
 
   program:
     needs: base
     runs-on: arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:podman
+      image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
         tag: [c, cpp, python, zig]
     steps:
-      - uses: actions/checkout@v4
-      - uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-      - uses: redhat-actions/buildah-build@v2
-        with:
-          context: Program/${{ matrix.tag }}
-          containerfiles: Program/${{ matrix.tag }}/Dockerfile
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
-      - uses: redhat-actions/push-to-registry@v2
-        with:
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
+      - *checkout
+      - *login
+      - run: |
+          /kaniko/executor \
+            --context Program/${{ matrix.tag }} \
+            --dockerfile Program/${{ matrix.tag }}/Dockerfile \
+            --destination ghcr.io/${{ github.repository }}:${{ matrix.tag }} \
+            --single-snapshot
 
   gs:
     needs: base
     runs-on: arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:podman
+      image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
         tag: [mc_jre_17, mc_jre_21, steam]
     steps:
-      - uses: actions/checkout@v4
-      - uses: redhat-actions/buildah-build@v2
-        with:
-          context: GS/${{ matrix.tag }}
-          containerfiles: GS/${{ matrix.tag }}/Dockerfile
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
+      - *checkout
+      - *login
+      - run: |
+          /kaniko/executor \
+            --context GS/${{ matrix.tag }} \
+            --dockerfile GS/${{ matrix.tag }}/Dockerfile \
+            --destination ghcr.io/${{ github.repository }}:${{ matrix.tag }} \
+            --single-snapshot
 
   renv:
     needs: base
     runs-on: arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:podman
+      image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
         tag: [zine, podman]
     steps:
-      - uses: actions/checkout@v4
-      - uses: redhat-actions/buildah-build@v2
-        with:
-          context: Renv/${{ matrix.tag }}
-          containerfiles: Renv/${{ matrix.tag }}/Dockerfile
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.tag }}
+      - *checkout
+      - *login
+      - run: |
+          /kaniko/executor \
+            --context Renv/${{ matrix.tag }} \
+            --dockerfile Renv/${{ matrix.tag }}/Dockerfile \
+            --destination ghcr.io/${{ github.repository }}:${{ matrix.tag }} \
+            --single-snapshot 
 
   cleanup:
     needs: [program, gs, renv]
     runs-on: arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:podman
+      image: ghcr.nju.edu.cn/eoeair/cenv:base
     steps:
       - uses: camargo/delete-untagged-action@v1
         with:
