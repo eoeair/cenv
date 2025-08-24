@@ -91,7 +91,7 @@ jobs:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
-        tag: [zine, podman]
+        tag: [zine]
     steps:
       - *checkout
       - *login

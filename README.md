@@ -3,7 +3,7 @@
 **ghcr.io: https://github.com/eoeair/cenv/pkgs/container/cenv**
 
 ## Platform
-* OS : debian 12
+* OS : debian 13
 * ARCH : x86_64
 
 ## Usage
