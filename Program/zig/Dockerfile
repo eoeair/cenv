@@ -1,6 +1,6 @@
 FROM ghcr.io/eoeair/cenv:base AS builder
 
-ENV VERSION=0.14.1
+ENV VERSION=0.15.1
 
 WORKDIR /opt
 
