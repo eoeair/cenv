@@ -13,28 +13,26 @@
 `cp -r .devcontainer WORKSDIR`
 
 ## Image dependencies
-* `Program` : development environment, primarily serving the devcontainer.
-* `GS` : game server
+* `Denv` : development environment
 * `Renv`: runtime environment
 
 ```mermaid
 graph LR
 
-Base-->G{GS}-->GA{MC}
-G-->GB(steam)
-GA{MC}-->GAA{JAVA}
-GA{MC}-->GAB(BE)
-GAA-->GAC(JRE_17)
-GAA-->GAD(JRE_21)
-
-Base-->P{PROGRAM}
-P-->PA(C)
-P-->PB(Cpp)
-P-->PC(Python)
-P-->PD(Zig)
+Base-->D{Denv}
+D-->DA(C)
+D-->DB(Cpp)
+D-->DC(Python)
+D-->DD(Zig)
 
 Base-->R{RENV}
 R-->RA(Zine)
+R-->RB(steam)
+R-->RC{MC}
+RC-->RCA{JAVA}
+RC-->RCB(BE)
+RCA-->RCAA(JRE_17)
+RCA-->RCAB(JRE_21)
 ```
 
 ## Mirror source

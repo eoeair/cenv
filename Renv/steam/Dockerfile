@@ -19,6 +19,3 @@ RUN sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.l
     ln -s /usr/games/steamcmd /usr/bin/steamcmd && \
     # Set up workspace
     mkdir -p /workspace
-
-ENTRYPOINT ["tini", "-g", "--"]
-CMD ["bash"]
