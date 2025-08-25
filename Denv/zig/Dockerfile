@@ -1,4 +1,4 @@
-FROM ghcr.io/eoeair/cenv:base AS builder
+FROM ghcr.io/eoeair/cenv:debian AS builder
 
 ENV VERSION=0.15.1
 
@@ -9,7 +9,7 @@ RUN apt-get update --yes && apt-get install --yes wget xz-utils && \
     tar -xf zig-x86_64-linux-$VERSION.tar.xz && \
     mv zig-x86_64-linux-$VERSION zig
 
-FROM ghcr.io/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:debian
 
 COPY --from=builder /opt/zig /opt/zig
 

@@ -1,4 +1,4 @@
-FROM ghcr.io/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:debian
 
 ENV PATH="/opt/base/bin:${PATH}"
 

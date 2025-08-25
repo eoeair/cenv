@@ -1,1 +1,1 @@
-FROM ghcr.io/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:debian

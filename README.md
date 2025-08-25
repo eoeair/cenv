@@ -3,7 +3,9 @@
 **ghcr.io: https://github.com/eoeair/cenv/pkgs/container/cenv**
 
 ## Platform
-* OS : debian 13
+* OS : 
+    * debian 13
+    * alpine latest
 * ARCH : x86_64
 
 ## Usage
@@ -18,14 +20,16 @@
 
 ```mermaid
 graph LR
+Debian-->B{Base}
+Alpine-->B
 
-Base-->D{Denv}
+B-->D{Denv}
 D-->DA(C)
 D-->DB(Cpp)
 D-->DC(Python)
 D-->DD(Zig)
 
-Base-->R{RENV}
+B-->R{RENV}
 R-->RA(Zine)
 R-->RB(steam)
 R-->RC{MC}

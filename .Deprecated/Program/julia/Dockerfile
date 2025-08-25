@@ -4,7 +4,7 @@ FROM ghcr.io/eoeair/cenv:python AS builder
 RUN apt-get update --yes && apt-get install --yes --no-install-recommends gnupg && \
     pip install jill && jill install --confirm 1
 
-FROM ghcr.io/eoeair/cenv:base
+FROM ghcr.io/eoeair/cenv:debian
 
 ARG JULIA_MIRROR
 
