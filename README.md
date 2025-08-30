@@ -32,6 +32,7 @@ D-->DA(C)
 D-->DB(Cpp)
 D-->DC(Python)
 D-->DD(Zig)
+D-->DE(Upython)
 
 B-->R{RENV}
 R-->RA(Zine)

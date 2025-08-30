@@ -58,7 +58,7 @@ jobs:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
-        tag: [c, cpp, python, zig]
+        tag: [c, cpp, python, zig, upython]
     steps:
       - *checkout
       - *login
