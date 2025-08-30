@@ -17,7 +17,8 @@
     1. Press Ctrl + Shift + P (Windows/Linux) or Cmd + Shift + P (macOS) to open the Command Palette.
     2. Type `Reload Window` in the search bar.
     3. Select the `Reload Window` command.
-
+2. upython(micropython): 
+    1. raspberry pico: before use, please run `ls -l /dev/ttyACM0 && sudo usermod -aG dialout $USER`, add youself to `dialout`
 ## Image dependencies
 * `Denv` : development environment
 * `Renv`: runtime environment
@@ -32,6 +33,7 @@ D-->DA(C)
 D-->DB(Cpp)
 D-->DC(Python)
 D-->DD(Zig)
+D-->DE(Upython)
 
 B-->R{RENV}
 R-->RA(Zine)
