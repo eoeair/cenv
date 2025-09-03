@@ -76,7 +76,7 @@ jobs:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
-        tag: [zine, mc_be, mc_jre_17, mc_jre_21, steam]
+        tag: [zine, mc_be, mc_jre_17, mc_jre_21, steam, novnc]
     steps:
       - *checkout
       - *login

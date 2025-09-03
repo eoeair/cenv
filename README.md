@@ -43,6 +43,7 @@ RC-->RCA{JAVA}
 RC-->RCB(BE)
 RCA-->RCAA(JRE_17)
 RCA-->RCAB(JRE_21)
+R-->RD(Novnc)
 ```
 
 ## Mirror source
