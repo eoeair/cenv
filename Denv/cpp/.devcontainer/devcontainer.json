@@ -10,5 +10,6 @@
 		"vscode": {
 		  "extensions": ["formulahendry.code-runner", "ms-vscode.cpptools-extension-pack"]
 		}
-	  }
+	  },
+	"postCreateCommand": "apt-get update && apt-get install -y git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
 }

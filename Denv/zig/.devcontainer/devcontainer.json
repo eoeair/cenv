@@ -10,5 +10,6 @@
 		"vscode": {
 		  "extensions": ["ziglang.vscode-zig"]
 		}
-	  }
+	  },
+	"postCreateCommand": "apk add git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
 }

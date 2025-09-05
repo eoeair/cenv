@@ -9,5 +9,6 @@
 		"vscode": {
 		  "extensions": ["ms-python.python", "donjayamanne.python-environment-manager", "ms-python.vscode-pylance", "ms-toolsai.jupyter"]
 		}
-	  }
+	  },
+	"postCreateCommand": "apt-get update && apt-get install -y git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
 }

@@ -13,12 +13,15 @@
 2. devcontainer(VScode): `cp -r .devcontainer WORKDIR`
 
 ## Note
-1. C/C++ environment: `.vscode` config may not be loaded on the first run. Please `Reload Window` to ensure the configuration is loaded.
+1. Denv: `git` may not be loaded on the first run. Please `Reload Window`.
     1. Press Ctrl + Shift + P (Windows/Linux) or Cmd + Shift + P (macOS) to open the Command Palette.
     2. Type `Reload Window` in the search bar.
     3. Select the `Reload Window` command.
-2. upython(micropython): 
-    1. raspberry pico: before use, please run `ls -l /dev/ttyACM0 && sudo usermod -aG dialout $USER`, add youself to `dialout`
+2. C/C++ environment: `.vscode` config may not be loaded on the first run. Please `Reload Window` to ensure the configuration is loaded.
+3. upython(micropython): 
+    1. run `sudo usermod -aG dialout $USER` before use devcontainer, add youself to `dialout`
+    2. raspberry pico: `/dev/ttyACM0`
+    3. raspberry pi: `/dev/ttyUSB0`
 ## Image dependencies
 * `Denv` : development environment
 * `Renv`: runtime environment
