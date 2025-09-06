@@ -3,7 +3,7 @@
 {
 	"name": "upython",
 	
-	"image": "ghcr.nju.edu.cn/eoeair/cenv:upython",
+	"image": "ghcr.io/eoeair/cenv:upython",
 	"runArgs": ["--device=/dev/ttyACM0"],
 	// Configure vscode-extensions.
 	"customizations": {
@@ -11,5 +11,5 @@
 		  "extensions": ["davescodemusings.mpremote", "walklinewang.code-completion-for-micropython", "youkony.serial-xterm"]
 		}
 	  },
-	"postCreateCommand": "apt-get update && apt-get install -y git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
+	"postCreateCommand": "apk add git openssh && ssh-keyscan github.com >> ~/.ssh/known_hosts"
 }
