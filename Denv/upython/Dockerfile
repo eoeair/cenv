@@ -1,4 +1,4 @@
-FROM ghcr.io/eoeair/cenv:debian
+FROM ghcr.io/eoeair/cenv:alpine
 
-# install micropython and mpremote
-RUN apt-get update --yes && apt-get install --yes --no-install-recommends micropython-mpremote minicom && apt-get clean && rm -rf /var/lib/apt/lists/*
+# install mpremote
+RUN apk add --no-cache py3-pip minicom && pip install mpremote --break-system-packages && pip cache purge
