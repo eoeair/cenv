@@ -3,13 +3,13 @@
 {
 	"name": "upython",
 	
-	"image": "ghcr.nju.edu.cn/eoeair/cenv:upython",
+	"image": "ghcr.io/eoeair/cenv:upython",
 	"runArgs": ["--device=/dev/ttyACM0"],
 	// Configure vscode-extensions.
 	"customizations": {
 		"vscode": {
-		  "extensions": ["davescodemusings.mpremote", "walklinewang.code-completion-for-micropython", "youkony.serial-xterm"]
+		  "extensions": ["ms-python.vscode-pylance", "davescodemusings.mpremote", "youkony.serial-xterm"]
 		}
 	  },
-	"postCreateCommand": "apt-get update && apt-get install -y git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
+	"postCreateCommand": "apk add git openssh && pip install micropython-rp2-pico-stubs --break-system-packages && ssh-keyscan github.com >> ~/.ssh/known_hosts"
 }
