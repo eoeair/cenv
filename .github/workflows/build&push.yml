@@ -87,6 +87,25 @@ jobs:
             --destination ghcr.io/${{ github.repository }}:${{ matrix.tag }} \
             --single-snapshot 
 
+  Gpu:
+    needs: base
+    runs-on: arc
+    container:
+      image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
+    strategy:
+      matrix:
+        tag: [rocm]
+    steps:
+      - *checkout
+      - *login
+      - run: |
+          /kaniko/executor \
+            --context Gpu/${{ matrix.tag }} \
+            --dockerfile Gpu/${{ matrix.tag }}/Dockerfile \
+            --destination ghcr.io/${{ github.repository }}:${{ matrix.tag }} \
+            --single-snapshot 
+
+
   cleanup:
     needs: [Denv, Renv]
     runs-on: arc

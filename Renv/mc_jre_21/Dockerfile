@@ -17,7 +17,3 @@ WORKDIR /workspace
 
 RUN ln -s /usr/lib/jvm/zulu21/bin/java /usr/bin/java && \
     mkdir -p /workspace
-
-# Configure container startup
-CMD ["java -jar server.jar nogui"]
-
