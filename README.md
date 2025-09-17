@@ -7,7 +7,7 @@
     * debian 13
     * alpine latest
 * ARCH: x86_64
-* ROCM: 6.3.4
+* ROCM: 7.0.0
 ## Container Usage
 1. oci: `docker run -it`
 2. devcontainer(VScode): `cp -r .devcontainer WORKDIR`
@@ -32,12 +32,12 @@
         1. apt install git clang patchelf rocm
         2. git clone https://github.com/ROCm/rocm-jax.git
         3. cd rocm-jax/jax_rocm_plugin
-        4. python3 build/build.py build --wheels=jax-rocm-plugin,jax-rocm-pjrt --rocm_version=6 --rocm_path=/opt/rocm-6.4.3
+        4. python3 build/build.py build --wheels=jax-rocm-plugin,jax-rocm-pjrt --rocm_version=7 --rocm_path=/opt/rocm
     5. how to run jax: jax support 0.6.x(0.6.2 is tested)
         1. apt install rocm-llvm rccl hipsolver hipfft miopen-hip libamd-comgr2 
         2. pip install jax==0.6.2
-        3. pip install ./jax_rocm6_pjrt-0.6.0.dev20250909-py3-none-manylinux2014_x86_64.whl
-        4. pip install ./jax_rocm6_plugin-0.6.0.dev20250909-cp311-cp311-manylinux2014_x86_64.whl
+        3. pip install ./jax_rocm7_pjrt-0.6.0.dev20250917-py3-none-manylinux2014_x86_64.whl
+        4. pip install ./jax_rocm7_plugin-0.6.0.dev20250917-cp311-cp311-manylinux2014_x86_64.whl
 ## Image dependencies
 * `Denv` : development environment
 * `Renv`: runtime environment

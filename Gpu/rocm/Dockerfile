@@ -20,9 +20,9 @@ RUN apt-get update --yes && apt-get install --yes --no-install-recommends python
 
 # Install ROCm dependencies
 RUN apt-get update --yes && apt-get install --yes wget && \
-    wget https://repo.radeon.com/amdgpu-install/6.4.3/ubuntu/jammy/amdgpu-install_6.4.60403-1_all.deb && \
-    apt install --yes ./amdgpu-install_6.4.60403-1_all.deb && \
-    rm amdgpu-install_6.4.60403-1_all.deb
+    wget https://repo.radeon.com/amdgpu-install/7.0/ubuntu/jammy/amdgpu-install_7.0.70000-1_all.deb && \
+    apt install --yes ./amdgpu-install_7.0.70000-1_all.deb && \
+    rm amdgpu-install_7.0.70000-1_all.deb
 
 # Configure container startup
 ENTRYPOINT ["tini", "-g", "--"]
