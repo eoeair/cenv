@@ -7,7 +7,7 @@
     * debian 13
     * alpine latest
 * ARCH: x86_64
-* ROCM: 7.0.0
+* ROCM: 7.0.1
 ## Container Usage
 1. oci: `docker run -it`
 2. devcontainer(VScode): `cp -r .devcontainer WORKDIR`
