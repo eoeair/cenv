@@ -94,7 +94,7 @@ jobs:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:v1.25.1-debug
     strategy:
       matrix:
-        tag: [rocm]
+        tag: [rocm, rocm6.4]
     steps:
       - *checkout
       - *login

@@ -27,7 +27,7 @@
 4. rocm: 
     1. run `sudo apt install rocminfo`
     2. run `sudo usermod -aG video,render $USER` before use container, add youself to `video`,`render`
-    3. not include any package, please install what you want
+    3. not include any package, please install what you want(`apt install rocm`)
     4. how to build jax wheels: this step no need availble gpu, you can run on cpu_only runner
         1. apt install git clang patchelf rocm
         2. git clone https://github.com/ROCm/rocm-jax.git
@@ -43,6 +43,12 @@
     6. for china,maybe need a mirror site:
         1. run `sed -i 's/repo.radeon.com/radeon.geekery.cn/g' /etc/apt/sources.list.d/amdgpu.list`
         2. run `sed -i 's/repo.radeon.com/radeon.geekery.cn/g' /etc/apt/sources.list.d/rocm.list`
+    7. how to run pytorch: only support rocm6.4
+        1. run `pip install torch torchvision --index-url https://download.pytorch.org/whl/rocm6.4`
+        2. PyTorch currently only supports ROCm 6.4. Please do not use the default cenv:rocm; instead, use cenv:rocm6.4.
+        3. for china,maybe need a mirror site:
+            1. run `pip install torch torchvision torchaudio --no-deps -f https://mirrors.aliyun.com/pytorch-wheels/rocm6.4/`
+            2. run `pip install numpy pillow filelock fsspec jinja2 networkx sympy pytorch-triton-rocm -f https://mirrors.aliyun.com/pytorch-wheels/` (When installing PyTorch from the ROCm wheel mirror, you will need to manually install some dependencies.)
 ## Image dependencies
 * `Denv` : development environment
 * `Renv`: runtime environment
@@ -54,6 +60,7 @@ Debian-->B{Base}
 Alpine-->B
 
 B-->G{Gpu}-->GA(Rocm)
+G-->GB(Rocm6.4)
 
 B-->D{Denv}
 D-->DA(C)
