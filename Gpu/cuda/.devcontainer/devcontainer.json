@@ -1,0 +1,14 @@
+// For format details, see https://aka.ms/devcontainer.json. 
+// For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "cuda",
+	"image": "ghcr.io/eoeair/cenv:cuda",
+	"runArgs": ["--runtime=nvidia", "--gpus all", "--shm-size=8G"],
+	// Configure vscode-extensions.
+	"customizations": {
+		"vscode": {
+			"extensions": ["ms-python.python", "ms-python.vscode-pylance", "ms-toolsai.jupyter", "codeium.codeium"]
+		}
+	  },
+	"postCreateCommand": "apt-get update --yes && apt-get install --yes git && ssh-keyscan github.com >> ~/.ssh/known_hosts"
+}
