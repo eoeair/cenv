@@ -13,7 +13,6 @@ COPY --from=builder /usr/lib/jvm/zulu17/ /usr/lib/jvm/zulu17/
 
 USER root
 
-WORKDIR /workspace
+RUN ln -s /usr/lib/jvm/zulu17/bin/java /usr/bin/java
 
-RUN ln -s /usr/lib/jvm/zulu17/bin/java /usr/bin/java && \
-    mkdir -p /workspace
+WORKDIR /workspace

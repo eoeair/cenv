@@ -16,6 +16,7 @@ RUN sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.l
     # Create user
     useradd --no-log-init --create-home --shell /bin/bash --uid "${UID}" --no-user-group "${USER}" && \
     # let steamcmd directly run
-    ln -s /usr/games/steamcmd /usr/bin/steamcmd && \
-    # Set up workspace
-    mkdir -p /workspace
+    ln -s /usr/games/steamcmd /usr/bin/steamcmd
+
+# Set up workspace
+WORKDIR /workspace
