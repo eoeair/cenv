@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM ghcr.io/rblaine95/alpine:latest
 
 USER root
 

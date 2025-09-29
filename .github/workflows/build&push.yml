@@ -52,7 +52,7 @@ jobs:
             --single-snapshot
 
   Denv:
-    needs: base
+    needs: Base
     runs-on: eoeair-arc
     container:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:latest-debug
@@ -70,7 +70,7 @@ jobs:
             --single-snapshot
 
   Renv:
-    needs: base
+    needs: Base
     runs-on: eoeair-arc
     container:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:latest-debug
@@ -88,7 +88,7 @@ jobs:
             --single-snapshot 
 
   Gpu:
-    needs: base
+    needs: Base
     runs-on: eoeair-arc
     container:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:latest-debug
@@ -107,10 +107,10 @@ jobs:
 
 
   cleanup:
-    needs: [Denv, Renv]
+    needs: [Denv, Renv, Gpu]
     runs-on: eoeair-arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:base
+      image: ghcr.nju.edu.cn/eoeair/cenv:debian
     steps:
       - uses: camargo/delete-untagged-action@v1
         with:

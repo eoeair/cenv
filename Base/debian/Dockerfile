@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM ghcr.io/rblaine95/debian:trixie-slim
 
 USER root
 
