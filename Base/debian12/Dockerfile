@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM ghcr.io/rblaine95/debian:bookworm-slim
 
 USER root
 
