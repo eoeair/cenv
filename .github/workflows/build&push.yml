@@ -27,7 +27,7 @@ jobs:
         tag: [bookworm-slim, testing-slim]
     steps:
       - run: crane auth login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-      - run: crane copy swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/debian:${{ matrix.tag }} ghcr.io/eoeair/cenv:${{ matrix.tag }}
+      - run: crane copy swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/debian:${{ matrix.tag }} ghcr.io/eoeair/cenv:${{ matrix.tag }}
 
   MirrorA:
     runs-on: eoeair-arc
@@ -37,6 +37,7 @@ jobs:
       matrix:
         tag: [edge]
     steps:
+      - run: crane auth login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
       - run: crane copy swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/alpine:${{ matrix.tag }} ghcr.io/eoeair/cenv:${{ matrix.tag }}
 
   Base:
