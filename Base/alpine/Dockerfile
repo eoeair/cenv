@@ -1,4 +1,4 @@
-FROM ghcr.io/rblaine95/alpine:latest
+FROM ghcr.io/eoeair/cenv:edge
 
 USER root
 

@@ -5,8 +5,8 @@
 ## Platform
 * ARCH: x86_64
 * OS: 
-    * debian 13 & 12 (only support GPU)
-    * alpine latest
+    * debian testing & 12 (only support GPU)
+    * alpine edge
 * ROCM: 7.0.1 & 6.4.3
 * CUDA: >= 12.3
 ## Container Usage
@@ -19,6 +19,7 @@
     2. Type `Reload Window` in the search bar.
     3. Select the `Reload Window` command.
 2. C/C++ environment: `.vscode` config may not be loaded on the first run. Please `Reload Window` to ensure the configuration is loaded.
+    1. if you need source, please run `sed -i 's/Types: deb/Types: deb deb-src/' /etc/apt/sources.list.d/debian.sources`
 3. upython(micropython): 
     1. run `sudo usermod -aG dialout $USER` before use container, add youself to `dialout`
     2. hardware -> tty:
@@ -85,6 +86,7 @@ RC-->RCB(BE)
 RCA-->RCAA(JRE_17)
 RCA-->RCAB(JRE_21)
 R-->RD(Novnc)
+R-->RE(Crane)
 ```
 
 ## Mirror source
