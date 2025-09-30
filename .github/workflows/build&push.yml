@@ -110,7 +110,7 @@ jobs:
     needs: [Denv, Renv, Gpu]
     runs-on: eoeair-arc
     container:
-      image: ghcr.nju.edu.cn/eoeair/cenv:base
+      image: ghcr.nju.edu.cn/eoeair/cenv:debian
     steps:
       - uses: camargo/delete-untagged-action@v1
         with:
