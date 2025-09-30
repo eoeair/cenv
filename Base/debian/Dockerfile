@@ -1,4 +1,4 @@
-FROM ghcr.io/rblaine95/debian:trixie-slim
+FROM ghcr.io/eoeair/cenv:testing-slim
 
 USER root
 
