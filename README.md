@@ -7,7 +7,7 @@
 * OS: 
     * debian testing & 12 (only support GPU)
     * alpine edge
-* ROCM: 7.0.1 & 6.4.3
+* ROCM: 7.0.1
 * CUDA: >= 12.3
 ## Container Usage
 1. oci: `docker run -it`, See the `runArgs` section of the devcontainer config file for more options.
@@ -68,7 +68,6 @@ Alpine-->B
  
 B-->G{Gpu}-->GA(Rocm)
 G-->GB(CUDA)
-G-->GC(Rocm6.4)
 
 B-->D{Denv}
 D-->DA(C)
@@ -81,10 +80,8 @@ B-->R{RENV}
 R-->RA(Zine)
 R-->RB(Steam)
 R-->RC{MC}
-RC-->RCA{JAVA}
+RC-->RCA(JRE_21)
 RC-->RCB(BE)
-RCA-->RCAA(JRE_17)
-RCA-->RCAB(JRE_21)
 R-->RD(Novnc)
 R-->RE(Crane)
 ```
