@@ -72,6 +72,7 @@ G-->GB(CUDA)
 B-->D{Denv}
 D-->DA(C)
 D-->DB(Cpp)
+D-->DF(Debforge)
 D-->DC(Python)
 D-->DD(Zig)
 D-->DE(Upython)
