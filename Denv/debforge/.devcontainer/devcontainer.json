@@ -4,7 +4,7 @@
 	"name": "debforge",
 	
 	"image": "ghcr.io/eoeair/cenv:debforge",
-
+	"runArgs": ["--network=host", "--privileged", "--pid=host", "--shm-size=8G"],
 	// Configure vscode-extensions.
 	"customizations": {
 		"vscode": {
