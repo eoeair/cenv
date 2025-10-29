@@ -1,5 +1,9 @@
 FROM ghcr.io/eoeair/cenv:testing-slim
 
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
 USER root
 
 # Configure environment
