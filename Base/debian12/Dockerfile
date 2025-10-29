@@ -4,6 +4,8 @@ USER root
 
 # Configure environment
 ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
     PATH="/opt/base/bin:${PATH}"
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
