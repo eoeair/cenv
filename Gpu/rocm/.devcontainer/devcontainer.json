@@ -3,7 +3,7 @@
 {
 	"name": "rocm",
 	"image": "ghcr.io/eoeair/cenv:rocm",
-	"runArgs": ["--device=/dev/kfd", "--device=/dev/dri", "--shm-size=8G"],
+	"runArgs": ["--device=/dev/kfd", "--device=/dev/dri", "--shm-size=8G", "--group-add=keep-groups"],
 	// Configure vscode-extensions.
 	"customizations": {
 		"vscode": {

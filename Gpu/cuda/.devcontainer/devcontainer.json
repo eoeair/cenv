@@ -3,7 +3,7 @@
 {
 	"name": "cuda",
 	"image": "ghcr.io/eoeair/cenv:cuda",
-	"runArgs": ["--runtime=nvidia", "--gpus all", "--shm-size=8G"],
+	"runArgs": ["--device=nvidia.com/gpu=all", "--shm-size=8G", "--group-add=keep-groups"],
 	// Configure vscode-extensions.
 	"customizations": {
 		"vscode": {
