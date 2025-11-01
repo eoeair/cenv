@@ -10,7 +10,7 @@
 * ROCM: 7.0.1
 * CUDA: >= 12.3
 ## Container Usage
-1. oci: `docker run -it`, See the `runArgs` section of the devcontainer config file for more options.
+1. oci: `podman run -it`, See the `runArgs` section of the devcontainer config file for more options.
 2. devcontainer(VScode): `cp -r .devcontainer WORKDIR`
 
 ## Note
@@ -35,10 +35,10 @@
     1. run `sudo apt install rocminfo`
     2. run `sudo usermod -aG video,render $USER` before use container, add youself to `video`,`render`
     3. not include any package, please install what you want(`apt install rocm`)
-    4. how to run jax: jax support 0.6.0
+    4. how to run jax/flax: jax support 0.6.0, flax support 0.11
         1. apt install hipsolver hipfft miopen-hip rccl rocm-llvm rocprofiler-sdk hsa-amd-aqlprofile libamd-comgr2 libdw1  (***I just want to minimize runtime; you can absolutely do a full ROCm installation.***)
-        2. pip install jax==0.6.0
-        3. pip install https://github.com/ROCm/rocm-jax/releases/download/rocm-jax-v0.6.0/jaxlib-0.6.0-cp311-cp311-manylinux2014_x86_64.whl
+        2. pip install jax==0.6.2
+        3. pip install https://github.com/ROCm/rocm-jax/releases/download/rocm-jax-v0.6.0/jaxlib-0.6.2-cp311-cp311-manylinux2014_x86_64.whl
         4. pip install https://github.com/ROCm/rocm-jax/releases/download/rocm-jax-v0.6.0/jax_rocm7_pjrt-0.6.0-py3-none-manylinux_2_28_x86_64.whl https://github.com/ROCm/rocm-jax/releases/download/rocm-jax-v0.6.0/jax_rocm7_plugin-0.6.0-cp311-cp311-manylinux_2_28_x86_64.whl
     5. for china,maybe need a mirror site:
         1. run `sed -i 's/repo.radeon.com/radeon.geekery.cn/g' /etc/apt/sources.list.d/amdgpu.list`
@@ -74,9 +74,7 @@ D-->DE(Upython)
 B-->R{RENV}
 R-->RA(Zine)
 R-->RB(Steam)
-R-->RC{MC}
-RC-->RCA(JRE_21)
-RC-->RCB(BE)
+R-->RC{MC}-->RCA(JRE_21)
 R-->RD(Novnc)
 R-->RE(Crane)
 ```
