@@ -24,7 +24,7 @@ jobs:
       image: ghcr.nju.edu.cn/eoeair/cenv:crane
     strategy:
       matrix:
-        tag: [bookworm-slim, testing-slim]
+        tag: [testing-slim]
     steps:
       - run: crane auth login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
       - run: crane copy swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/debian:${{ matrix.tag }} ghcr.io/eoeair/cenv:${{ matrix.tag }}
@@ -47,7 +47,7 @@ jobs:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:latest-debug
     strategy:
       matrix:
-        tag: [alpine, debian, debian12]
+        tag: [alpine, debian]
     steps:
       - &checkout
         run: |
@@ -111,13 +111,13 @@ jobs:
             --single-snapshot 
 
   Gpu:
-    needs: Base
+    needs: Denv
     runs-on: eoeair-arc
     container:
       image: ghcr.nju.edu.cn/kaniko-build/dist/chainguard-dev-kaniko/executor:latest-debug
     strategy:
       matrix:
-        tag: [rocm, rocm6.4, cuda]
+        tag: [rocm, cuda]
     steps:
       - *checkout
       - *login
@@ -130,7 +130,7 @@ jobs:
 
 
   cleanup:
-    needs: [Denv, Renv, Gpu]
+    needs: [Gpu, Renv]
     runs-on: eoeair-arc
     container:
       image: ghcr.nju.edu.cn/eoeair/cenv:debian
