@@ -68,7 +68,7 @@ G-->GB(CUDA)
 B-->R{RENV}
 R-->RA(Zine)
 R-->RB(Steam)
-R-->RC{MC}-->RCA(JRE_21)
+R-->RC(JRE_21)
 R-->RD(Novnc)
 R-->RE(Crane)
 ```
