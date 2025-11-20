@@ -37,4 +37,7 @@ jobs:
             --context ${{ inputs.folder }}/${{ inputs.tag }} \
             --dockerfile ${{ inputs.folder }}/${{ inputs.tag }}/Dockerfile \
             --destination ghcr.io/${{ github.repository }}:${{ inputs.tag }} \
+            --cache=true \
+            --cache-copy-layers \
+            --cache-run-layers \
             --single-snapshot

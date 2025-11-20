@@ -65,4 +65,5 @@ jobs:
     steps:
       - uses: camargo/delete-untagged-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-name: ${{ github.repository }}
+          github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
